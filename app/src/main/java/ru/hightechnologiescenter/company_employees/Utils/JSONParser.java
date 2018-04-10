@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.hightechnologiescenter.company_employees.Model.Company;
 import ru.hightechnologiescenter.company_employees.Model.Employee;
 
 public class JSONParser {
@@ -24,16 +25,19 @@ public class JSONParser {
             String TAG = "JsonParser";
             if (url != null) {
                 try {
-                    JSONArray array = new JSONArray(jsonStr);
-
-                    JSONArray jsonArray = array.getJSONArray(0);
-                    jsonArray.toString();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonArray.getJSONObject(i).getString("name");
-                        Log.d(TAG, jsonArray.getString(0));
-                    }
-                    for (int i=0; i<array.length(); i++){
-
+                    JSONObject reader = new JSONObject(jsonStr);
+                    JSONObject company = reader.getJSONObject("company");
+                    Company companyModel = new Company();
+                    String compamyName = company.getString("name");
+                    Log.d("Name is: ", compamyName);
+                    companyModel.setName(compamyName);
+                    String compamyAge = company.getString("age");
+                    Log.d("Age is: ", compamyAge);
+                    companyModel.setAge(compamyAge);
+                    JSONArray competencesArray = company.getJSONArray("competences");
+                    for (int i = 0; i < competencesArray.length(); i++) {
+                        Log.d(TAG, competencesArray.get(i).toString());
+                        //companyModel.getCompetences().add(competencesArray.get(i).toString());
                     }
                     /*for (int i = 0; i < array.length(); i++) {
                         JSONObject c = array.getJSONObject(i);

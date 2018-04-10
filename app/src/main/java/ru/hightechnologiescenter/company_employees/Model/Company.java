@@ -1,9 +1,11 @@
 package ru.hightechnologiescenter.company_employees.Model;
 
+import java.util.List;
+
 public class Company {
     private String name;
     private String age;
-    private String competences;
+    private List<String> competences;
 
     public String getName() {
         return name;
@@ -21,11 +23,11 @@ public class Company {
         this.age = age;
     }
 
-    public String getCompetences() {
+    public List<String> getCompetences() {
         return competences;
     }
 
-    public void setCompetences(String competences) {
+    public void setCompetences(List<String> competences) {
         this.competences = competences;
     }
 }
