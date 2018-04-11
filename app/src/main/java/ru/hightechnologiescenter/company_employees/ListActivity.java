@@ -1,7 +1,6 @@
 package ru.hightechnologiescenter.company_employees;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,10 +27,7 @@ public class ListActivity extends AppCompatActivity {
 
         lv = findViewById(R.id.employeesList);
         if (Utils.isNetworkAvailable(this)) {
-            String emplName = "name";
-            String emplNumber = "phone_number";
-            String emplSkills = "skills";
-            new GetData().execute(URL, emplName, emplNumber, emplSkills);
+            new GetData().execute(URL);
         } else {
             Toast.makeText(this, "No Network Connection", Toast.LENGTH_LONG).show();
         }
@@ -42,7 +38,7 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... params) {
-            employeeList = new JSONParser().getEmployees(params[0], params[1], params[2], params[3]);
+            employeeList = new JSONParser().getEmployees(params[0]);
             return null;
         }
 

@@ -14,15 +14,14 @@ import ru.hightechnologiescenter.company_employees.Model.Employee;
 
 public class JSONParser {
 
-    private List<Employee> listArray;
+    private ArrayList competencesArray = new ArrayList<>();
+    private ArrayList skillsArray = new ArrayList<>();
 
-    public List<Employee> getEmployees(String url, String Name, String Phone_number, String Skills) {
+    public List<Employee> getEmployees(String url) {
         try {
-            listArray = new ArrayList<>();
-
             HttpHandler sh = new HttpHandler();
             String jsonStr = sh.makeServiceCall(url);
-            String TAG = "JsonParser";
+            String TAG = "JSONParser";
             if (url != null) {
                 try {
                     JSONObject reader = new JSONObject(jsonStr);
@@ -34,26 +33,34 @@ public class JSONParser {
                     String compamyAge = company.getString("age");
                     Log.d("Age is: ", compamyAge);
                     companyModel.setAge(compamyAge);
-                    JSONArray competencesArray = company.getJSONArray("competences");
-                    for (int i = 0; i < competencesArray.length(); i++) {
-                        Log.d(TAG, competencesArray.get(i).toString());
-                        //companyModel.getCompetences().add(competencesArray.get(i).toString());
+                    JSONArray competencesJSONArray = company.getJSONArray("competences");
+                    for (int i = 0; i < competencesJSONArray.length(); i++) {
+                        competencesArray.add(competencesJSONArray.get(i).toString());
+                        Log.d(TAG, competencesJSONArray.get(i).toString());
                     }
-                    /*for (int i = 0; i < array.length(); i++) {
-                        JSONObject c = array.getJSONObject(i);
+                    companyModel.setCompetences(competencesArray);
+                    JSONArray employeesJSONArray = company.getJSONArray("employees");
 
-                        Employee employeeItem = new Employee();
+                    //Проходим по списку сотрудников
+                    for (int i = 0; i < employeesJSONArray.length(); i++) {
+                        Employee employeeModel = new Employee();
 
-                        String name = c.getString(Name);
-                        Log.d("Name is: ", name);
-                        String phone_number = c.getString(Phone_number);
-                        Log.d("Number is: ", phone_number);
-                        String skills = c.getString(Skills);
-                        Log.d("Skills: ", skills);
-                        employeeItem.setName(name);
-                        employeeItem.setPhone_number(phone_number);
-                        employeeItem.setSkills(skills);
-                        listArray.add(employeeItem);
+                        //Объект сотрудника
+                        JSONObject employeeSingleJSONObject = employeesJSONArray.getJSONObject(i);
+
+                        String employeeName = employeeSingleJSONObject.getString("name");
+                        Log.d("Name is: ", employeeName);
+                        String employeeNumber = employeeSingleJSONObject.getString("phone_number");
+                        Log.d("Number is: ", employeeNumber);
+
+                        JSONArray skillsSingleJSONArray = employeeSingleJSONObject.getJSONArray("skills");
+                        for (int j = 0; j < skillsSingleJSONArray.length(); j++) {
+                            skillsArray.add(skillsSingleJSONArray.get(j).toString());
+                        }
+                        Log.d(TAG, "Skills is: " + skillsSingleJSONArray.toString());
+                    }
+                    /*
+                    listArray.add(employeeItem);
                     }*/
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -64,6 +71,6 @@ public class JSONParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listArray;
+        return null;
     }
 }
