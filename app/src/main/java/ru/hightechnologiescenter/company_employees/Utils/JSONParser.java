@@ -17,7 +17,7 @@ public class JSONParser {
     private ArrayList competencesArray = new ArrayList<>();
     private ArrayList skillsArray = new ArrayList<>();
 
-    public List<Employee> getEmployees(String url) {
+    public List<Company> getData(String url) {
         try {
             HttpHandler sh = new HttpHandler();
             String jsonStr = sh.makeServiceCall(url);
@@ -50,18 +50,19 @@ public class JSONParser {
 
                         String employeeName = employeeSingleJSONObject.getString("name");
                         Log.d("Name is: ", employeeName);
+                        employeeModel.setName(employeeName);
                         String employeeNumber = employeeSingleJSONObject.getString("phone_number");
                         Log.d("Number is: ", employeeNumber);
+                        employeeModel.setPhone_number(employeeNumber);
 
                         JSONArray skillsSingleJSONArray = employeeSingleJSONObject.getJSONArray("skills");
                         for (int j = 0; j < skillsSingleJSONArray.length(); j++) {
                             skillsArray.add(skillsSingleJSONArray.get(j).toString());
                         }
                         Log.d(TAG, "Skills is: " + skillsSingleJSONArray.toString());
+                        employeeModel.setSkills(skillsArray);
+                        companyModel.addEmployee(employeeModel);
                     }
-                    /*
-                    listArray.add(employeeItem);
-                    }*/
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                 }

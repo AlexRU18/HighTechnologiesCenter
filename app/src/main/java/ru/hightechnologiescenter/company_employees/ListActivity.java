@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.hightechnologiescenter.company_employees.Adapter.employeeListAdapter;
+import ru.hightechnologiescenter.company_employees.Model.Company;
 import ru.hightechnologiescenter.company_employees.Model.Employee;
 import ru.hightechnologiescenter.company_employees.Utils.JSONParser;
 import ru.hightechnologiescenter.company_employees.Utils.Utils;
@@ -34,15 +36,15 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    class GetData extends AsyncTask<String, Void, Void> {
+    class GetData extends AsyncTask<String, Void, ArrayList<Company>> {
 
         @Override
-        protected Void doInBackground(String... params) {
-            employeeList = new JSONParser().getEmployees(params[0]);
+        protected ArrayList<Company> doInBackground(String... params) {
+            employeeList = new JSONParser().getData(URL);
             return null;
         }
 
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(ArrayList<Company> result) {
             super.onPostExecute(result);
             if (null == employeeList || employeeList.size() == 0) {
                 Toast.makeText(getApplicationContext(), "No data found from web", Toast.LENGTH_LONG).show();

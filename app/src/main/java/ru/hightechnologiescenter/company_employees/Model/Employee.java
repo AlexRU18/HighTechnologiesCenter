@@ -1,9 +1,12 @@
 package ru.hightechnologiescenter.company_employees.Model;
 
+import java.util.List;
+
 public class Employee {
     private String name;
     private String phone_number;
-    private String skills;
+
+    private List<String> skills;
 
     public String getName() {
         return name;
@@ -21,11 +24,11 @@ public class Employee {
         this.phone_number = phone_number;
     }
 
-    public String getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 
