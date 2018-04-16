@@ -6,6 +6,7 @@ public class Company {
     private String name;
     private String age;
     private List<String> competences;
+    private List<Employee> employees;
 
     public String getName() {
         return name;
@@ -29,5 +30,17 @@ public class Company {
 
     public void setCompetences(List<String> competences) {
         this.competences = competences;
+    }
+
+    public void addEmployee(Employee e) {
+        employees.add(e);
+    }
+
+    public Employee getEmpl(int position) {
+        return employees.get(position);
+    }
+
+    public List<Employee> getEmplList() {
+        return employees;
     }
 }
