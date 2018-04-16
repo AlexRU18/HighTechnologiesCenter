@@ -15,6 +15,7 @@ import ru.hightechnologiescenter.company_employees.Model.Employee;
 public class JSONParser {
 
     private ArrayList competencesArray = new ArrayList<>();
+    private ArrayList employeesArray = new ArrayList<>();
     private ArrayList skillsArray = new ArrayList<>();
 
     public List<Company> getData(String url) {
@@ -61,8 +62,10 @@ public class JSONParser {
                         }
                         Log.d(TAG, "Skills is: " + skillsSingleJSONArray.toString());
                         employeeModel.setSkills(skillsArray);
+                        employeesArray.add(employeeModel);
                         //companyModel.setEmployee(employeeModel);
                     }
+                    companyModel.setEmployee(employeesArray);
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                 }

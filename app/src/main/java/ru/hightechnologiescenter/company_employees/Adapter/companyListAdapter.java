@@ -19,11 +19,11 @@ import ru.hightechnologiescenter.company_employees.R;
 
 public class companyListAdapter extends ArrayAdapter<Company> {
 
-    private List<Company> company;
+    private List<Company> companyList;
 
-    public companyListAdapter(Context mContext, int layoutResourceId, List<Company> company) {
-        super(mContext, layoutResourceId, company);
-        this.company = company;
+    public companyListAdapter(Context mContext, int layoutResourceId, List<Company> companyList) {
+        super(mContext, layoutResourceId, companyList);
+        this.companyList = companyList;
     }
 
     @NonNull
@@ -43,17 +43,24 @@ public class companyListAdapter extends ArrayAdapter<Company> {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        if ((company == null) || ((position + 1) > company.size()))
+        if ((companyList == null) || ((position + 1) > companyList.size()))
             return view;
 
-        Company employee = company.get(position);
+        Company company = companyList.get(position);
 
+        holder.companyName = view.findViewById(R.id.companyNameDynamical);
+        holder.companyAge = view.findViewById(R.id.companyAgeDynamical);
         holder.emplName = view.findViewById(R.id.empl_name);
         holder.avatarImg = view.findViewById(R.id.empl_avatar);
 
-        if (holder.emplName != null && null != employee.getName()
-                && employee.getName().trim().length() > 0) {
-            holder.emplName.setText(Html.fromHtml(employee.getName()));
+        if (holder.companyName != null && null != company.getName()
+                && company.getName().trim().length() > 0) {
+            holder.companyName.setText(Html.fromHtml(company.getName()));
+        }
+
+        if (holder.emplName != null && null != company.getName()
+                && company.getName().trim().length() > 0) {
+            holder.emplName.setText(Html.fromHtml(company.getName()));
         }
         if (holder.avatarImg != null) {
                 Picasso.get()
@@ -68,7 +75,7 @@ public class companyListAdapter extends ArrayAdapter<Company> {
     }
 
     private class ViewHolder {
-        private TextView emplName, emplPhone, emplSkills;
+        private TextView companyName, companyAge, companyCompetit, emplName, emplPhone, emplSkills;
         private ImageView avatarImg;
     }
 }
