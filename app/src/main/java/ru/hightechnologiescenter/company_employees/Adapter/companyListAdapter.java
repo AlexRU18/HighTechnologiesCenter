@@ -14,16 +14,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ru.hightechnologiescenter.company_employees.Model.Employee;
+import ru.hightechnologiescenter.company_employees.Model.Company;
 import ru.hightechnologiescenter.company_employees.R;
 
-public class employeeListAdapter extends ArrayAdapter<Employee> {
+public class companyListAdapter extends ArrayAdapter<Company> {
 
-    private List<Employee> items;
+    private List<Company> company;
 
-    public employeeListAdapter(Context mContext, int layoutResourceId, List<Employee> items) {
-        super(mContext, layoutResourceId, items);
-        this.items = items;
+    public companyListAdapter(Context mContext, int layoutResourceId, List<Company> company) {
+        super(mContext, layoutResourceId, company);
+        this.company = company;
     }
 
     @NonNull
@@ -43,10 +43,10 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        if ((items == null) || ((position + 1) > items.size()))
+        if ((company == null) || ((position + 1) > company.size()))
             return view;
 
-        Employee employee = items.get(position);
+        Company employee = company.get(position);
 
         holder.emplName = view.findViewById(R.id.empl_name);
         holder.avatarImg = view.findViewById(R.id.empl_avatar);

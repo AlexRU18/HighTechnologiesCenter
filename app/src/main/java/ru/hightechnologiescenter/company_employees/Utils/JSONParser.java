@@ -61,7 +61,7 @@ public class JSONParser {
                         }
                         Log.d(TAG, "Skills is: " + skillsSingleJSONArray.toString());
                         employeeModel.setSkills(skillsArray);
-                        companyModel.addEmployee(employeeModel);
+                        //companyModel.setEmployee(employeeModel);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());

@@ -10,16 +10,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.hightechnologiescenter.company_employees.Adapter.employeeListAdapter;
+import ru.hightechnologiescenter.company_employees.Adapter.companyListAdapter;
 import ru.hightechnologiescenter.company_employees.Model.Company;
-import ru.hightechnologiescenter.company_employees.Model.Employee;
 import ru.hightechnologiescenter.company_employees.Utils.JSONParser;
 import ru.hightechnologiescenter.company_employees.Utils.Utils;
 
 public class ListActivity extends AppCompatActivity {
 
     private static final String URL = "http://www.mocky.io/v2/56fa31e0110000f920a72134";
-    List<Employee> employeeList;
+    List<Company> companyList;
     ListView lv;
 
     @Override
@@ -40,17 +39,17 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         protected ArrayList<Company> doInBackground(String... params) {
-            employeeList = new JSONParser().getData(URL);
+            companyList = new JSONParser().getData(URL);
             return null;
         }
 
         protected void onPostExecute(ArrayList<Company> result) {
             super.onPostExecute(result);
-            if (null == employeeList || employeeList.size() == 0) {
+            if (null == companyList || companyList.size() == 0) {
                 Toast.makeText(getApplicationContext(), "No data found from web", Toast.LENGTH_LONG).show();
             } else {
-                employeeListAdapter lvAdapter = new employeeListAdapter(getApplicationContext(),
-                        R.layout.employees_list_item, employeeList);
+                companyListAdapter lvAdapter = new companyListAdapter(getApplicationContext(),
+                        R.layout.employees_list_item, companyList);
                 lv.setAdapter(lvAdapter);
             }
         }
