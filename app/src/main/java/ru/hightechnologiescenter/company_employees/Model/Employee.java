@@ -5,7 +5,6 @@ import java.util.List;
 public class Employee {
     private String name;
     private String phone_number;
-
     private List<String> skills;
 
     public String getName() {

@@ -1,31 +1,39 @@
 package ru.hightechnologiescenter.company_employees;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ru.hightechnologiescenter.company_employees.Adapter.companyListAdapter;
+import ru.hightechnologiescenter.company_employees.Adapter.employeeListAdapter;
 import ru.hightechnologiescenter.company_employees.Model.Company;
+import ru.hightechnologiescenter.company_employees.Model.Employee;
 import ru.hightechnologiescenter.company_employees.Utils.JSONParser;
 import ru.hightechnologiescenter.company_employees.Utils.Utils;
 
 public class ListActivity extends AppCompatActivity {
 
     private static final String URL = "http://www.mocky.io/v2/56fa31e0110000f920a72134";
-    List<Company> companyList;
+    ArrayList<Employee> employeeList = new ArrayList<>();
+    ;
     ListView lv;
+    String TAG = "Activity";
+    private TextView companyName, companyAge, companyCompetit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
+        companyName = findViewById(R.id.companyNameDynamical);
+        companyAge = findViewById(R.id.companyAgeDynamical);
+        companyCompetit = findViewById(R.id.companyCompetencesDynamical);
         lv = findViewById(R.id.employeesList);
         if (Utils.isNetworkAvailable(this)) {
             new GetData().execute(URL);
@@ -35,21 +43,43 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    class GetData extends AsyncTask<String, Void, ArrayList<Company>> {
+    class GetData extends AsyncTask<String, Void, Company> {
+        ProgressDialog dialog;
 
         @Override
-        protected ArrayList<Company> doInBackground(String... params) {
-            companyList = new JSONParser().getData(URL);
-            return null;
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(ListActivity.this, "Загрузка", "Пожалуйста, подождите");
         }
 
-        protected void onPostExecute(ArrayList<Company> result) {
+        @Override
+        protected Company doInBackground(String... params) {
+            Company company = new JSONParser().getData(URL);
+            return company;
+        }
+
+        protected void onPostExecute(Company result) {
             super.onPostExecute(result);
-            if (null == companyList || companyList.size() == 0) {
+            dialog.dismiss();
+            if (null == result) {
                 Toast.makeText(getApplicationContext(), "No data found from web", Toast.LENGTH_LONG).show();
             } else {
-                companyListAdapter lvAdapter = new companyListAdapter(getApplicationContext(),
-                        R.layout.employees_list_item, companyList);
+                companyName.setText(result.getName());
+                companyAge.setText(result.getAge());
+                StringBuilder companyCompetenceItem = new StringBuilder();
+                for (int i = 0; i < result.getCompetences().size(); i++) {
+                    companyCompetenceItem.append(result.getCompetences().get(i));
+                    if (i != result.getCompetences().size() - 1)
+                        companyCompetenceItem.append(", ");
+                }
+                companyCompetit.setText(companyCompetenceItem.toString());
+
+                for (int i = 1; i < result.getEmployee().size(); i++) {
+                    Log.d(TAG, "EMPLOYEE NAME:" + result.getEmployee().get(i) + ", i is: " + i);
+                    employeeList.add(result.getEmployee().get(i));
+                }
+                employeeListAdapter lvAdapter = new employeeListAdapter(getApplicationContext(),
+                        R.layout.employees_list_item, employeeList);
                 lv.setAdapter(lvAdapter);
             }
         }
