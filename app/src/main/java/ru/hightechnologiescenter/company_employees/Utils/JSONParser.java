@@ -29,7 +29,6 @@ public class JSONParser {
                     JSONObject reader = new JSONObject(jsonStr);
                     JSONObject company = reader.getJSONObject("company");
 
-
                     String companyName = company.getString("name");
                     Log.d("Name is: ", companyName);
                     companyModel.setName(companyName);

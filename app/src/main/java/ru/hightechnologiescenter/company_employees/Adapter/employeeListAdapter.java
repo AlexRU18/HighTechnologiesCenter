@@ -35,8 +35,8 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            assert inflater != null;
-            view = inflater.inflate(position, null);
+
+            view = inflater.inflate(R.layout.employees_list_item, null);
 
             holder = new ViewHolder();
             view.setTag(holder);
@@ -64,8 +64,8 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         }
         if (holder.avatarImg != null) {
             Picasso.get()
-                    .load(R.mipmap.ic_launcher)
-                    .resize(250, 190)
+                    .load(R.mipmap.ic_avatar)
+                    .resize(250, 250)
                     .centerCrop()
                     .into(holder.avatarImg);
         }/* else {
