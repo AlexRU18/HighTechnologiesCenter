@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +21,7 @@ public class ListActivity extends AppCompatActivity {
 
     private static final String URL = "http://www.mocky.io/v2/56fa31e0110000f920a72134";
     ArrayList<Employee> employeeList = new ArrayList<>();
-    ;
     ListView lv;
-    String TAG = "Activity";
     private TextView companyName, companyAge, companyCompetit;
 
     @Override
@@ -54,8 +51,7 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         protected Company doInBackground(String... params) {
-            Company company = new JSONParser().getData(URL);
-            return company;
+            return new JSONParser().getData(URL);
         }
 
         protected void onPostExecute(Company result) {
@@ -75,7 +71,6 @@ public class ListActivity extends AppCompatActivity {
                 companyCompetit.setText(companyCompetenceItem.toString());
 
                 for (int i = 1; i < result.getEmployee().size(); i++) {
-                    Log.d(TAG, "EMPLOYEE NAME:" + result.getEmployee().get(i) + ", i is: " + i);
                     employeeList.add(result.getEmployee().get(i));
                 }
                 employeeListAdapter lvAdapter = new employeeListAdapter(getApplicationContext(),

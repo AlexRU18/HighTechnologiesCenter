@@ -16,6 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/company_name"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text=""
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/companyName"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textSize="16sp"
         android:text="@string/company_age"
         app:layout_constraintStart_toStartOf="@+id/companyName"
         app:layout_constraintTop_toBottomOf="@+id/companyName" />
@@ -48,6 +51,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text=""
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/companyAge"
         app:layout_constraintTop_toBottomOf="@+id/companyName" />
 
@@ -57,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textSize="16sp"
         android:text="@string/company_competences"
         app:layout_constraintStart_toStartOf="@+id/companyAge"
         app:layout_constraintTop_toBottomOf="@+id/companyAge"
@@ -66,12 +71,12 @@
         android:id="@+id/companyCompetencesDynamical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@+id/companyCompetences"
-        app:layout_constraintTop_toBottomOf="@+id/companyAge" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/companyCompetences"
+        app:layout_constraintTop_toBottomOf="@+id/companyCompetences" />
 
     <ListView
         android:id="@+id/employeesList"
@@ -86,5 +91,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyCompetences" />
+        app:layout_constraintTop_toBottomOf="@+id/companyCompetencesDynamical" />
 </android.support.constraint.ConstraintLayout>

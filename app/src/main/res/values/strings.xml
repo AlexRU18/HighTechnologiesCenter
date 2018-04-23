@@ -3,4 +3,7 @@
     <string name="company_competences">Company competences:</string>
     <string name="company_age">Company age:</string>
     <string name="company_name">Company name:</string>
+    <string name="employee_name">Name: </string>
+    <string name="employee_number">Number: </string>
+    <string name="skills_title">Skills:</string>
 </resources>

@@ -1,8 +1,8 @@
 package ru.hightechnologiescenter.company_employees.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +26,7 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         this.employeeList = employeeList;
     }
 
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
@@ -36,6 +37,7 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+            assert inflater != null;
             view = inflater.inflate(R.layout.employees_list_item, null);
 
             holder = new ViewHolder();
@@ -43,9 +45,6 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-
-        /*if ((employeeList == null) || ((position + 1) > employeeList.size()))
-            return view;*/
 
         Employee employee = employeeList.get(position);
 
@@ -56,10 +55,10 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
 
         if (holder.emplName != null && null != employee.getName()
                 && employee.getName().trim().length() > 0) {
-            holder.emplName.setText(Html.fromHtml(employee.getName()));
+            holder.emplName.setText(employee.getName());
         }
         if (holder.emplPhone != null && null != employee.getPhone_number()) {
-            holder.emplPhone.setText(Html.fromHtml(employee.getPhone_number()));
+            holder.emplPhone.setText(employee.getPhone_number());
         }
         StringBuilder employeeSkillsItem = new StringBuilder();
         for (int i = 0; i < employee.getSkills().size(); i++) {

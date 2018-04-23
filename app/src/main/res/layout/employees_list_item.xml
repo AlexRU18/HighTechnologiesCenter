@@ -16,14 +16,41 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        android:id="@+id/empl_nameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/employee_name"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/empl_avatar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/empl_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/empl_avatar"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/empl_nameTitle"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/empl_phone_numberTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="@string/employee_number"
+        app:layout_constraintStart_toEndOf="@+id/empl_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/empl_name" />
 
     <TextView
         android:id="@+id/empl_phone_number"
@@ -32,8 +59,22 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/empl_avatar"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/empl_phone_numberTitle"
         app:layout_constraintTop_toBottomOf="@+id/empl_name" />
+
+    <TextView
+        android:id="@+id/empl_skillsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="@string/skills_title"
+        app:layout_constraintStart_toEndOf="@+id/empl_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/empl_phone_number" />
 
     <TextView
         android:id="@+id/empl_skills"
@@ -42,7 +83,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/empl_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/empl_phone_number" />
+        app:layout_constraintTop_toBottomOf="@+id/empl_skillsTitle" />
 
 </android.support.constraint.ConstraintLayout>

@@ -35,7 +35,6 @@ class HttpHandler {
         } catch (Exception e) {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
-        //Log.d(TAG, response);
         return response;
     }
 
@@ -56,7 +55,6 @@ class HttpHandler {
                 e.printStackTrace();
             }
         }
-        //Log.d(TAG, sb.toString());
         return sb.toString();
     }
 }
