@@ -12,16 +12,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import ru.hightechnologiescenter.company_employees.Model.Employee;
 import ru.hightechnologiescenter.company_employees.R;
 
 public class employeeListAdapter extends ArrayAdapter<Employee> {
 
-    private List<Employee> employeeList;
+    private ArrayList<Employee> employeeList;
 
-    public employeeListAdapter(Context mContext, int layoutResourceId, List<Employee> employeeList) {
+    public employeeListAdapter(Context mContext, int layoutResourceId, ArrayList<Employee> employeeList) {
         super(mContext, layoutResourceId, employeeList);
         this.employeeList = employeeList;
     }
@@ -43,24 +43,32 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        if ((employeeList == null) || ((position + 1) > employeeList.size()))
-            return view;
+
+        /*if ((employeeList == null) || ((position + 1) > employeeList.size()))
+            return view;*/
 
         Employee employee = employeeList.get(position);
 
-        /*holder.companyName = view.findViewById(R.id.companyNameDynamical);
-        holder.companyAge = view.findViewById(R.id.companyAgeDynamical);*/
         holder.emplName = view.findViewById(R.id.empl_name);
+        holder.emplPhone = view.findViewById(R.id.empl_phone_number);
+        holder.emplSkills = view.findViewById(R.id.empl_skills);
         holder.avatarImg = view.findViewById(R.id.empl_avatar);
-
-       /* if (holder.companyName != null && null != company.getName()
-                && company.getName().trim().length() > 0) {
-            holder.companyName.setText(Html.fromHtml(company.getName()));
-        }*/
 
         if (holder.emplName != null && null != employee.getName()
                 && employee.getName().trim().length() > 0) {
             holder.emplName.setText(Html.fromHtml(employee.getName()));
+        }
+        if (holder.emplPhone != null && null != employee.getPhone_number()) {
+            holder.emplPhone.setText(Html.fromHtml(employee.getPhone_number()));
+        }
+        StringBuilder employeeSkillsItem = new StringBuilder();
+        for (int i = 0; i < employee.getSkills().size(); i++) {
+            employeeSkillsItem.append(employee.getSkills().get(i));
+            if (i != employee.getSkills().size() - 1)
+                employeeSkillsItem.append(", ");
+        }
+        if (holder.emplSkills != null && null != employee.getSkills()) {
+            holder.emplSkills.setText(employeeSkillsItem);
         }
         if (holder.avatarImg != null) {
             Picasso.get()
@@ -68,9 +76,9 @@ public class employeeListAdapter extends ArrayAdapter<Employee> {
                     .resize(250, 250)
                     .centerCrop()
                     .into(holder.avatarImg);
-        }/* else {
+        } else {
             holder.avatarImg.setImageResource(R.mipmap.ic_launcher);
-        }*/
+        }
         return view;
     }
 
