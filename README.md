@@ -3,4 +3,4 @@ JsonParser of Employee
 Test task for HTC\WDN
 
 Screenshot:
-![image](https://pp.userapi.com/c846417/v846417185/32232/cy5vrUS8Eqw.jpg)
+![image](https://sun9-9.userapi.com/c840627/v840627185/7a468/DszLnbHz60w.jpg)
