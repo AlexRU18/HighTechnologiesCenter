@@ -1,5 +1,6 @@
 package ru.hightechnologiescenter.company_employees.Model;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Employee {
@@ -30,5 +31,11 @@ public class Employee {
     public void setSkills(List<String> skills) {
         this.skills = skills;
     }
+
+    public static Comparator<Employee> COMPARE_BY_NAME = new Comparator<Employee>() {
+        public int compare(Employee one, Employee other) {
+            return one.name.compareTo(other.name);
+        }
+    };
 
 }

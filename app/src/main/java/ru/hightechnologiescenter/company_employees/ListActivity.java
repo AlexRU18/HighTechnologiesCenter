@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ru.hightechnologiescenter.company_employees.Adapter.employeeListAdapter;
 import ru.hightechnologiescenter.company_employees.Model.Company;
@@ -73,9 +74,14 @@ public class ListActivity extends AppCompatActivity {
                 for (int i = 1; i < result.getEmployee().size(); i++) {
                     employeeList.add(result.getEmployee().get(i));
                 }
+                Collections.sort(employeeList, Employee.COMPARE_BY_NAME);
+                for (int i = 0; i < employeeList.size(); i++) {
+                    System.out.println(employeeList.get(i));
+                }
                 employeeListAdapter lvAdapter = new employeeListAdapter(getApplicationContext(),
                         R.layout.employees_list_item, employeeList);
                 lv.setAdapter(lvAdapter);
+                lvAdapter.notifyDataSetChanged();
             }
         }
     }
